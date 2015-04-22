@@ -7,7 +7,7 @@
 *.userosscache
 *.sln.docstates
 Thumbs.db
-exort.nodejs/addons/*.node
+NodeJSApp/addons/*.node
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
