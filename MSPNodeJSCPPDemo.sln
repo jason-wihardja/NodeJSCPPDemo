@@ -11,8 +11,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CallbackFunctionDemo", "Cal
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AsyncDemo", "AsyncDemo\AsyncDemo.vcxproj", "{C1EE944A-CA41-4D0F-B107-B7EE36F2C8FC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestAddon", "TestAddon\TestAddon.vcxproj", "{A69710F8-23DC-4884-B1D8-398A664EFADE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,16 +61,6 @@ Global
 		{C1EE944A-CA41-4D0F-B107-B7EE36F2C8FC}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{C1EE944A-CA41-4D0F-B107-B7EE36F2C8FC}.Release|Win32.ActiveCfg = Release|Win32
 		{C1EE944A-CA41-4D0F-B107-B7EE36F2C8FC}.Release|Win32.Build.0 = Release|Win32
-		{A69710F8-23DC-4884-B1D8-398A664EFADE}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{A69710F8-23DC-4884-B1D8-398A664EFADE}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{A69710F8-23DC-4884-B1D8-398A664EFADE}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{A69710F8-23DC-4884-B1D8-398A664EFADE}.Debug|Win32.ActiveCfg = Debug|Win32
-		{A69710F8-23DC-4884-B1D8-398A664EFADE}.Debug|Win32.Build.0 = Debug|Win32
-		{A69710F8-23DC-4884-B1D8-398A664EFADE}.Release|Any CPU.ActiveCfg = Release|Win32
-		{A69710F8-23DC-4884-B1D8-398A664EFADE}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{A69710F8-23DC-4884-B1D8-398A664EFADE}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{A69710F8-23DC-4884-B1D8-398A664EFADE}.Release|Win32.ActiveCfg = Release|Win32
-		{A69710F8-23DC-4884-B1D8-398A664EFADE}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
