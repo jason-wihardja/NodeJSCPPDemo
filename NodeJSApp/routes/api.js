@@ -5,7 +5,7 @@
     var router = express.Router();
 
     router.get('/test', function (request, response, next) {
-        addon.getTestData(request.query.queryString, function (err, result) {
+        addon.getTestData(request.query.dbName, function (err, result) {
             if (_.isEmpty(err)) {
                 response.type('json');
                 response.send(JSON.stringify(result));
