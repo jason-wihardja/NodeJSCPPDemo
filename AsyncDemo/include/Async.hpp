@@ -22,4 +22,4 @@ private:
 	static void New(const FunctionCallbackInfo<Value>& args);
 };
 
-#endif // __Async_hpp__
+#endif // !__Async_hpp__

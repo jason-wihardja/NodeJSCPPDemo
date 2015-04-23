@@ -24,12 +24,18 @@
     <ClCompile Include="src\API\RESTController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\API\MySQLController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Async.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\API\RESTController.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\API\MySQLController.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

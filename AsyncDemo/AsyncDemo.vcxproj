@@ -11,11 +11,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\API\MySQLController.cpp" />
     <ClCompile Include="src\Async.cpp" />
     <ClCompile Include="src\API\RESTController.cpp" />
     <ClCompile Include="src\Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\API\MySQLController.hpp" />
     <ClInclude Include="include\Async.hpp" />
     <ClInclude Include="include\API\RESTController.hpp" />
   </ItemGroup>
