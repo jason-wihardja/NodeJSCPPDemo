@@ -31,7 +31,7 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="addons\SortJS.js" />
+    <Compile Include="addons\PrimeJS.js" />
     <Compile Include="app.js" />
     <Compile Include="cluster.js" />
     <Compile Include="routes\api.js" />
