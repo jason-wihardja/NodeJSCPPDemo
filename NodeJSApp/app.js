@@ -2,6 +2,7 @@
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var chalk = require('chalk');
+var path = require('path');
 
 // EXPRESS
 var app = express();
@@ -30,8 +31,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.use(express.static(path.join(__dirname)));
 
 // ROUTES
+app.get('/', function (request, response, next) {
+    response.render('IndexView', {
+        title: "Express",
+        content1: "Welcome to Express!"
+    });
+});
+
 app.use('/api', require('./routes/api.js')(express, asyncAddon));
 
 // 404 NOT FOUND
@@ -68,7 +77,3 @@ var server = app.listen(3000, function () {
     var port = server.address().port;
     console.log("Server listening at http://%s:%s", host, port);
 });
-
-/* TEST CODE */
-//require('./testCode/hello.js');
-//require('./testCode/callback.js');

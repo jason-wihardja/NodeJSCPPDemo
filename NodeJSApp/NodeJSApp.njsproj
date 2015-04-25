@@ -31,19 +31,21 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="addons\SortJS.js" />
     <Compile Include="app.js" />
     <Compile Include="cluster.js" />
     <Compile Include="routes\api.js" />
-    <Compile Include="testCode\callback.js" />
-    <Compile Include="testCode\hello.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
-    <Content Include="view\ErrorView.jade" />
+    <Content Include="stylesheets\style.css" />
+    <Content Include="views\ErrorView.jade" />
+    <Content Include="views\IndexView.jade" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="view\" />
+    <Folder Include="addons\" />
+    <Folder Include="stylesheets\" />
+    <Folder Include="views\" />
     <Folder Include="routes\" />
-    <Folder Include="testCode\" />
   </ItemGroup>
   <!-- Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them. -->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
