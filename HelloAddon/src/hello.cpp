@@ -11,16 +11,14 @@ void SayHello(const FunctionCallbackInfo<Value>& args) {
 	if (args.Length() > 1) {
 		isolate->ThrowException(Exception::TypeError(String::NewFromUtf8(isolate, "Too many arguments")));
 		return;
+	} else if (args.Length() == 0) {
+		args.GetReturnValue().Set(String::NewFromUtf8(isolate, "Hello World"));
 	} else {
-		if (args.Length() == 1) {
-			if (!args[0]->IsString()) {
-				isolate->ThrowException(Exception::TypeError(String::NewFromUtf8(isolate, "Wrong arguments")));
-			} else {
-				string argument(*String::Utf8Value(args[0]->ToString()));
-				args.GetReturnValue().Set(String::NewFromUtf8(isolate, argument.c_str()));
-			}
+		if (!args[0]->IsString()) {
+			isolate->ThrowException(Exception::TypeError(String::NewFromUtf8(isolate, "Wrong arguments type")));
 		} else {
-			args.GetReturnValue().Set(String::NewFromUtf8(isolate, "Hello World"));
+			string argument(*String::Utf8Value(args[0]->ToString()));
+			args.GetReturnValue().Set(String::NewFromUtf8(isolate, argument.c_str()));
 		}
 	}
 }

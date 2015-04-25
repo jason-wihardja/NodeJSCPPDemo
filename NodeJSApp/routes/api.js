@@ -1,4 +1,4 @@
-﻿module.exports = function (express, addon) {
+﻿module.exports = function (express) {
     var _ = require('underscore');
     var moment = require('moment');
     
@@ -26,6 +26,7 @@
     });
     
     var primeRouter = express.Router({ mergeParams: true });
+    router.use('/prime', primeRouter);
     primeRouter.get('/:number', function (request, response, next) {
         var number = parseInt(request.params.number);
 
@@ -79,20 +80,47 @@
             content2: "JS Time = " + jsTime
         });
     });
-    router.use('/prime', primeRouter);
-    
-    router.get('/test', function (request, response, next) {
-        addon.getTestData(request.query.dbName, function (err, result) {
-            if (_.isEmpty(err)) {
-                response.type('json');
-                response.send(JSON.stringify(result));
-            } else {
-                var error = new Error('Bad Request');
-                error.http_code = error.status = 400;
-                error.stack = err;
-                next(error);
-            }
+    primeRouter.get('/async/cpp/:number', function (request, response, next) {
+        var number = parseInt(request.params.number);
+        
+        var before = moment();
+        
+        require('../addons/PrimeCPP').findPrimeAsync(number, function (result) {
+            var afterCPP = moment();
+            
+            var cppTime = afterCPP - before;
+            
+            response.render('IndexView', {
+                title: "Prime Numbers",
+                content1: "Result = " + JSON.stringify(result),
+                content2: "C++ Time = " + cppTime
+            });
+            
+            console.log('Inside Callback Function');
         });
+        
+        console.log('Outside Callback Function');
+    });
+    primeRouter.get('/async/js/:number', function (request, response, next) {
+        var number = parseInt(request.params.number);
+        
+        var before = moment();
+        
+        require('../addons/PrimeJS').findPrimeAsync(number, function (result) {
+            var afterJS = moment();
+            
+            var jsTime = afterJS - before;
+            
+            response.render('IndexView', {
+                title: "Prime Numbers",
+                content1: "Result = " + JSON.stringify(result),
+                content2: "JS Time = " + jsTime
+            });
+
+            console.log('Inside Callback Function');
+        });
+
+        console.log('Outside Callback Function');
     });
     
     return router;

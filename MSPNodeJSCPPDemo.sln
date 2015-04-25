@@ -9,8 +9,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HelloAddon", "HelloAddon\He
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CallbackFunctionDemo", "CallbackFunctionDemo\CallbackFunctionDemo.vcxproj", "{69CB337A-3EA3-484D-BD4E-36558357C1B6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AsyncDemo", "AsyncDemo\AsyncDemo.vcxproj", "{C1EE944A-CA41-4D0F-B107-B7EE36F2C8FC}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PrimeCPP", "PrimeCPP\PrimeCPP.vcxproj", "{79894CFA-2286-435E-8DB1-167229CDF089}"
 EndProject
 Global
@@ -53,16 +51,6 @@ Global
 		{69CB337A-3EA3-484D-BD4E-36558357C1B6}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{69CB337A-3EA3-484D-BD4E-36558357C1B6}.Release|Win32.ActiveCfg = Release|Win32
 		{69CB337A-3EA3-484D-BD4E-36558357C1B6}.Release|Win32.Build.0 = Release|Win32
-		{C1EE944A-CA41-4D0F-B107-B7EE36F2C8FC}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{C1EE944A-CA41-4D0F-B107-B7EE36F2C8FC}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{C1EE944A-CA41-4D0F-B107-B7EE36F2C8FC}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{C1EE944A-CA41-4D0F-B107-B7EE36F2C8FC}.Debug|Win32.ActiveCfg = Debug|Win32
-		{C1EE944A-CA41-4D0F-B107-B7EE36F2C8FC}.Debug|Win32.Build.0 = Debug|Win32
-		{C1EE944A-CA41-4D0F-B107-B7EE36F2C8FC}.Release|Any CPU.ActiveCfg = Release|Win32
-		{C1EE944A-CA41-4D0F-B107-B7EE36F2C8FC}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{C1EE944A-CA41-4D0F-B107-B7EE36F2C8FC}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{C1EE944A-CA41-4D0F-B107-B7EE36F2C8FC}.Release|Win32.ActiveCfg = Release|Win32
-		{C1EE944A-CA41-4D0F-B107-B7EE36F2C8FC}.Release|Win32.Build.0 = Release|Win32
 		{79894CFA-2286-435E-8DB1-167229CDF089}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{79894CFA-2286-435E-8DB1-167229CDF089}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{79894CFA-2286-435E-8DB1-167229CDF089}.Debug|Mixed Platforms.Build.0 = Debug|Win32

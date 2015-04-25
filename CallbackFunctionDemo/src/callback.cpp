@@ -11,8 +11,12 @@ void Factorial(const FunctionCallbackInfo<Value>& args) {
 	Isolate* isolate = Isolate::GetCurrent();
 	HandleScope scope(isolate);
 
-	if (args.Length() == 2) {
-		if (args[0]->IsNumber() && args[1]->IsFunction()) {
+	if (args.Length() != 2) {
+		isolate->ThrowException(Exception::TypeError(String::NewFromUtf8(isolate, "Wrong number of arguments")));
+	} else {
+		if (!(args[0]->IsNumber() && args[1]->IsFunction())) {
+			isolate->ThrowException(Exception::TypeError(String::NewFromUtf8(isolate, "Wrong arguments type")));
+		} else {
 			int result = factorial(args[0]->Int32Value());
 
 			Local<Function> callbackFunction = Local<Function>::Cast(args[1]);
@@ -20,11 +24,7 @@ void Factorial(const FunctionCallbackInfo<Value>& args) {
 			Local<Value> argv[argc] = { Number::New(isolate, result) };
 
 			callbackFunction->Call(isolate->GetCurrentContext()->Global(), argc, argv);
-		} else {
-			isolate->ThrowException(Exception::TypeError(String::NewFromUtf8(isolate, "Wrong arguments type")));
 		}
-	} else {
-		isolate->ThrowException(Exception::TypeError(String::NewFromUtf8(isolate, "Wrong number of arguments")));
 	}
 }
 

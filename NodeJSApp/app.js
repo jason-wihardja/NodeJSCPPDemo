@@ -7,9 +7,6 @@ var path = require('path');
 // EXPRESS
 var app = express();
 
-// ASYNC DEMO
-var asyncAddon = require('./addons/AsyncDemo')();
-
 // APP CONFIGURATION
 if (app.get('env') === 'development') {
     morgan.token('pid', function (request, response) { return process.pid; });
@@ -41,7 +38,7 @@ app.get('/', function (request, response, next) {
     });
 });
 
-app.use('/api', require('./routes/api.js')(express, asyncAddon));
+app.use('/api', require('./routes/api')(express));
 
 // 404 NOT FOUND
 app.use(function (request, response, next) {
