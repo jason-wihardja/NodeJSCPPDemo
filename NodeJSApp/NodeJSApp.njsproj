@@ -35,6 +35,8 @@
     <Compile Include="app.js" />
     <Compile Include="cluster.js" />
     <Compile Include="routes\api.js" />
+    <Compile Include="routes\factorialAPI.js" />
+    <Compile Include="routes\primeAPI.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="stylesheets\style.css" />

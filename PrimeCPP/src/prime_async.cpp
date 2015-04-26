@@ -18,7 +18,7 @@ void PrimeAsync::FindPrimeAsync(const FunctionCallbackInfo<Value>& args) {
 			int number = args[0]->Int32Value();
 			Local<Function> callbackFunction = Local<Function>::Cast(args[1]);
 
-			Baton* baton = new Baton();
+			Baton<int, vector<int>>* baton = new Baton<int, vector<int>>();
 			baton->request.data = baton;
 			baton->callbackFunction.Reset(isolate, callbackFunction);
 
@@ -30,7 +30,7 @@ void PrimeAsync::FindPrimeAsync(const FunctionCallbackInfo<Value>& args) {
 }
 
 void PrimeAsync::FindPrimeWork(uv_work_t* request) {
-	Baton* baton = static_cast<Baton*>(request->data);
+	Baton<int, vector<int>>* baton = static_cast<Baton<int, vector<int>>*>(request->data);
 
 	baton->result.clear();
 
@@ -54,7 +54,7 @@ void PrimeAsync::FindPrimeAsyncAfter(uv_work_t* request, int status) {
 	Isolate* isolate = Isolate::GetCurrent();
 	EscapableHandleScope scope(isolate);
 
-	Baton* baton = static_cast<Baton*>(request->data);
+	Baton<int, vector<int>>* baton = static_cast<Baton<int, vector<int>>*>(request->data);
 	Local<Function> callbackFunction = Local<Function>::New(isolate, baton->callbackFunction);
 
 	Local<Array> returnValues = Array::New(isolate, baton->result.size());

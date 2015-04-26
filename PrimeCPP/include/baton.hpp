@@ -11,14 +11,15 @@
 using namespace v8;
 using namespace std;
 
+template <typename ParamType, typename ResultType>
 struct Baton {
 public:
 	uv_work_t request;
 	Persistent<Function> callbackFunction;
 
-	map<string, int> params;
+	map<string, ParamType> params;
 
-	vector<int> result;
+	ResultType result;
 };
 
 #endif // !__baton_hpp__
