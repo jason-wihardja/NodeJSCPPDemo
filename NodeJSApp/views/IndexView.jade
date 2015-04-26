@@ -5,7 +5,8 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     h1= title
-    p= content1
+    if content1
+        p= content1
     if content2
         p= content2
     if content3

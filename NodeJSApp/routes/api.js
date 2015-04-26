@@ -29,18 +29,18 @@
     router.use('/prime', primeRouter);
     primeRouter.get('/:number', function (request, response, next) {
         var number = parseInt(request.params.number);
-
+        
         var before = moment();
-
+        
         var primeNumbersJS = require('../addons/PrimeJS').findPrime(number);
         var afterJS = moment();
-
+        
         var primeNumbersCPP = require('../addons/PrimeCPP').findPrime(number);
         var afterCPP = moment();
-
+        
         var jsTime = afterJS - before;
         var cppTime = afterCPP - afterJS;
-
+        
         response.render('IndexView', {
             title: "Prime Numbers",
             content1: "Result = " + JSON.stringify(primeNumbersCPP),
@@ -50,7 +50,7 @@
     });
     primeRouter.get('/cpp/:number', function (request, response, next) {
         var number = parseInt(request.params.number);
-
+        
         var before = moment();
         
         var primeNumbersCPP = require('../addons/PrimeCPP').findPrime(number);
@@ -66,7 +66,7 @@
     });
     primeRouter.get('/js/:number', function (request, response, next) {
         var number = parseInt(request.params.number);
-
+        
         var before = moment();
         
         var primeNumbersJS = require('../addons/PrimeJS').findPrime(number);
@@ -116,10 +116,10 @@
                 content1: "Result = " + JSON.stringify(result),
                 content2: "JS Time = " + jsTime
             });
-
+            
             console.log('Inside Callback Function');
         });
-
+        
         console.log('Outside Callback Function');
     });
     

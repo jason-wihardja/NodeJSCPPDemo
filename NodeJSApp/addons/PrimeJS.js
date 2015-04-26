@@ -1,5 +1,5 @@
 ﻿module.exports = {
-    findPrime: function (number) {
+    calculatePrime: function (number) {
         var primeNumbers = [];
         for (var i = 2; i <= number; i++) {
             var isPrime = true;
@@ -17,23 +17,14 @@
         return primeNumbers;
     },
     
+    findPrime: function (number) {
+        return this.calculatePrime(number);
+    },
+    
     findPrimeAsync: function (number, callback) {
+        var self = this;
         process.nextTick(function () {
-            var primeNumbers = [];
-            for (var i = 2; i <= number; i++) {
-                var isPrime = true;
-                for (var j = 2; j < i; j++) {
-                    if (i % j == 0) {
-                        isPrime = false;
-                        break;
-                    }
-                }
-                if (isPrime) {
-                    primeNumbers.push(i);
-                }
-            }
-            
-            callback(primeNumbers);
+            callback(self.calculatePrime(number));
         });
     }
 };
