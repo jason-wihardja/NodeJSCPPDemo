@@ -24,6 +24,9 @@
     <ClCompile Include="src\prime_sync.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\prime_algorithm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\baton.hpp">
@@ -33,6 +36,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\prime_async.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\prime_algorithm.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

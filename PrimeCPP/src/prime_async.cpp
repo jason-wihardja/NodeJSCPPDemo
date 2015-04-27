@@ -1,10 +1,13 @@
 #include "prime_async.hpp"
+#include "prime_algorithm.hpp"
+
 #include "baton.hpp"
 
 void PrimeAsync::RegisterMethod(Handle<Object> exports) {
 	NODE_SET_METHOD(exports, "findPrimeAsync", PrimeAsync::FindPrimeAsync);
 }
 
+#pragma region FindPrimeAsync
 void PrimeAsync::FindPrimeAsync(const FunctionCallbackInfo<Value>& args) {
 	Isolate* isolate = Isolate::GetCurrent();
 	HandleScope scope(isolate);
@@ -28,28 +31,16 @@ void PrimeAsync::FindPrimeAsync(const FunctionCallbackInfo<Value>& args) {
 		}
 	}
 }
+#pragma endregion
 
+#pragma region FindPrimeWork
 void PrimeAsync::FindPrimeWork(uv_work_t* request) {
 	Baton<int, vector<int>>* baton = static_cast<Baton<int, vector<int>>*>(request->data);
-
-	baton->result.clear();
-
-	int number = baton->params["number"];
-
-	for (int i = 2; i <= number; i++) {
-		bool isPrime = true;
-		for (int j = 2; j < i; j++) {
-			if (i % j == 0) {
-				isPrime = false;
-				break;
-			}
-		}
-		if (isPrime) {
-			baton->result.push_back(i);
-		}
-	}
+	PrimeAlgorithm::GeneratePrime(baton->result, baton->params["number"]);
 }
+#pragma endregion
 
+#pragma region FindPrimeAsyncAfter
 void PrimeAsync::FindPrimeAsyncAfter(uv_work_t* request, int status) {
 	Isolate* isolate = Isolate::GetCurrent();
 	EscapableHandleScope scope(isolate);
@@ -69,3 +60,4 @@ void PrimeAsync::FindPrimeAsyncAfter(uv_work_t* request, int status) {
 	baton->callbackFunction.Reset();
 	delete baton;
 }
+#pragma endregion

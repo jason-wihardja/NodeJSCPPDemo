@@ -86,11 +86,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\prime.cpp" />
+    <ClCompile Include="src\prime_algorithm.cpp" />
     <ClCompile Include="src\prime_async.cpp" />
     <ClCompile Include="src\prime_sync.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\baton.hpp" />
+    <ClInclude Include="include\prime_algorithm.hpp" />
     <ClInclude Include="include\prime_async.hpp" />
     <ClInclude Include="include\prime_sync.hpp" />
   </ItemGroup>

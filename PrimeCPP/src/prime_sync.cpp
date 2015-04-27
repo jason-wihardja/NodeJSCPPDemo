@@ -1,13 +1,11 @@
 #include "prime_sync.hpp"
-
-#include <vector>
-
-using namespace std;
+#include "prime_algorithm.hpp"
 
 void PrimeSync::RegisterMethod(Handle<Object> exports) {
 	NODE_SET_METHOD(exports, "findPrime", PrimeSync::FindPrime);
 }
 
+#pragma region FindPrime
 void PrimeSync::FindPrime(const FunctionCallbackInfo<Value>& args) {
 	Isolate* isolate = Isolate::GetCurrent();
 	EscapableHandleScope scope(isolate);
@@ -18,21 +16,7 @@ void PrimeSync::FindPrime(const FunctionCallbackInfo<Value>& args) {
 		if (!args[0]->IsInt32()) {
 			isolate->ThrowException(Exception::TypeError(String::NewFromUtf8(isolate, "Wrong arguments type")));
 		} else {
-			int number = args[0]->Int32Value();
-			vector<int> primeNumbers;
-
-			for (int i = 2; i <= number; i++) {
-				bool isPrime = true;
-				for (int j = 2; j < i; j++) {
-					if (i % j == 0) {
-						isPrime = false;
-						break;
-					}
-				}
-				if (isPrime) {
-					primeNumbers.push_back(i);
-				}
-			}
+			vector<int> primeNumbers = PrimeAlgorithm::GeneratePrime(args[0]->Int32Value());
 
 			Local<Array> returnValues = Array::New(isolate, primeNumbers.size());
 			for (int i = 0; i < primeNumbers.size(); i++) {
@@ -43,3 +27,4 @@ void PrimeSync::FindPrime(const FunctionCallbackInfo<Value>& args) {
 		}
 	}
 }
+#pragma endregion

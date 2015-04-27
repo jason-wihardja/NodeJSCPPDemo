@@ -2,16 +2,20 @@
     // EXPRESS ROUTER
     var router = express.Router({ mergeParams: true });
     
-    /* SYNC API */
+    // ADDON
+    var primeNumberJSAddon = require('../addons/PrimeJS');
+    var primeNumberCPPAddon = require('../addons/PrimeCPP');
+    
+    /* SYNC METHOD */
     router.get('/:number', function (request, response, next) {
         var number = parseInt(request.params.number);
         
         var beforeJS = process.hrtime();
-        var primeNumbersJS = require('../addons/PrimeJS').findPrime(number);
+        var primeNumbersJS = primeNumberJSAddon.findPrime(number);
         var jsTime = process.hrtime(beforeJS);
         
         var beforeCPP = process.hrtime();
-        var primeNumbersCPP = require('../addons/PrimeCPP').findPrime(number);
+        var primeNumbersCPP = primeNumberCPPAddon.findPrime(number);
         var cppTime = process.hrtime(beforeCPP);
         
         response.render('IndexView', {
@@ -22,12 +26,12 @@
         });
     });
     
-    /* ASYNC API */
+    /* ASYNC METHOD */
     router.get('/cpp/:number', function (request, response, next) {
         var number = parseInt(request.params.number);
         
         var before = process.hrtime();
-        require('../addons/PrimeCPP').findPrimeAsync(number, function (result) {
+        primeNumberCPPAddon.findPrimeAsync(number, function (result) {
             var cppTime = process.hrtime(before);
             
             response.render('IndexView', {
@@ -42,7 +46,7 @@
         var number = parseInt(request.params.number);
         
         var before = process.hrtime();
-        require('../addons/PrimeJS').findPrimeAsync(number, function (result) {
+        primeNumberJSAddon.findPrimeAsync(number, function (result) {
             var jsTime = process.hrtime(before);
             
             response.render('IndexView', {

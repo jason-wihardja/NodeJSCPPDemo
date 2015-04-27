@@ -1,11 +1,12 @@
-﻿var express = require('express');
+﻿// EXPRESS
+var express = require('express');
+var app = express();
+
+// LIBRARIES
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var chalk = require('chalk');
 var path = require('path');
-
-// EXPRESS
-var app = express();
 
 // APP CONFIGURATION
 if (app.get('env') === 'development') {
