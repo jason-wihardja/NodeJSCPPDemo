@@ -2,12 +2,12 @@
     // EXPRESS ROUTER
     var router = express.Router({ mergeParams: true });
     
-    router.get('/', function (request, response, next) {
+    router.get('/:message?', function (request, response, next) {
         var helloAddon = require('../addons/HelloAddon');
         
         response.render('IndexView', {
             title: helloAddon.hello(),
-            content1: helloAddon.hello('MSP Rocks!')
+            content1: helloAddon.hello(request.params.message || 'MSP Rocks!')
         });
     });
     
