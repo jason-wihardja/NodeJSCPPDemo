@@ -39,13 +39,14 @@
     <Compile Include="routes\primeAPI.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
-    <Content Include="stylesheets\style.css" />
+    <Content Include="public\stylesheets\style.css" />
     <Content Include="views\ErrorView.jade" />
     <Content Include="views\IndexView.jade" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="addons\" />
-    <Folder Include="stylesheets\" />
+    <Folder Include="public\" />
+    <Folder Include="public\stylesheets\" />
     <Folder Include="views\" />
     <Folder Include="routes\" />
   </ItemGroup>
