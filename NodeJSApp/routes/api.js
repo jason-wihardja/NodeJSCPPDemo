@@ -7,7 +7,7 @@
         
         response.render('IndexView', {
             title: helloAddon.hello(),
-            content1: helloAddon.hello('MSP Rocks!')
+            content1: helloAddon.hello(request.query.message || "")
         });
     });
     
