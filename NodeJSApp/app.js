@@ -28,8 +28,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function (request, response, next) {
+    response.header('Access-Control-Allow-Origin', '*');
+    response.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    response.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
 
 // ROUTES
 app.get('/', function (request, response, next) {
@@ -37,6 +44,10 @@ app.get('/', function (request, response, next) {
         title: "Express",
         content1: "Welcome to Express!"
     });
+});
+
+app.get('/performance', function (request, response, next) {
+    response.render('PerformanceView', {});
 });
 
 app.use('/api', require('./routes/api')(express));

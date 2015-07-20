@@ -36,12 +36,14 @@
     <Compile Include="cluster.js" />
     <Compile Include="routes\api.js" />
     <Compile Include="routes\factorialAPI.js" />
+    <Compile Include="routes\performanceAPI.js" />
     <Compile Include="routes\primeAPI.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="public\stylesheets\style.css" />
-    <Content Include="views\ErrorView.jade" />
-    <Content Include="views\IndexView.jade" />
+    <Content Include="views\ErrorView.ejs" />
+    <Content Include="views\IndexView.ejs" />
+    <Content Include="views\PerformanceView.ejs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="addons\" />

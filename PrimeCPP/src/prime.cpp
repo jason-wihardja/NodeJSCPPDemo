@@ -10,4 +10,4 @@ void InitAll(Handle<Object> exports) {
 	PrimeAsync::RegisterMethod(exports);
 }
 
-NODE_MODULE(PrimeCPP, InitAll)
+NODE_MODULE(Prime, InitAll)

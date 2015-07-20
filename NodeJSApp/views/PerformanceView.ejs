@@ -1,0 +1,147 @@
+﻿<!doctype html>
+<html lang="en" ng-app="msp">
+    <head>
+        <title>Performance Monitoring</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.js"></script>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+        <link rel="stylesheet" href="http://jtblin.github.io/angular-chart.js/dist/angular-chart.min.css">
+        <script src="http://jtblin.github.io/angular-chart.js/dist/angular-chart.min.js"></script>
+    </head>
+    <body ng-controller="mspController">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-center">
+                        <p>Node.js - Windows API binding Demo</p>
+                    </h1>
+                </div>
+            </div>
+
+            <div>
+                <br />
+                <br />
+            </div>
+
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <!--<th colspan="2" class="text-center">{{performanceData.status == 'success' ? performanceData.data : performanceData.status}}</th>-->
+                                <th colspan="2" class="text-center">Performance Data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="width: 125px; vertical-align: middle;">CPU Usage</td>
+                                <td>
+                                    <canvas class="chart chart-line" data="data" labels="labels" legend="false" series="series" options="options" colours="colours"></canvas>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 125px; vertical-align: middle;">Memory Usage</td>
+                                <td>
+                                    <div class="progress" style="vertical-align: middle;">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: {{performanceData.data.ram_usage}}%; vertical-align: middle;">
+                                            {{performanceData.data.ram_usage}}%
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 125px; vertical-align: middle;">Physical Memory</td>
+                                <td>{{performanceData.data.total_physical_memory - performanceData.data.available_physical_memory}} / {{performanceData.data.total_physical_memory}} bytes</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 125px; vertical-align: middle;">Page File</td>
+                                <td>{{performanceData.data.total_page_file - performanceData.data.available_page_file}} / {{performanceData.data.total_page_file}} bytes</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 125px; vertical-align: middle;">Virtual Address Space</td>
+                                <td>{{performanceData.data.total_virtual - performanceData.data.available_virtual}} / {{performanceData.data.total_virtual}} bytes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <br />
+                <h3 class="text-center">Running Processes</h3>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <!--<th colspan="2" class="text-center">{{performanceData.status == 'success' ? performanceData.data : performanceData.status}}</th>-->
+                                <th class="text-center" style="width: 100px">Process ID</th>
+                                <th class="text-center">Path</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="process in performanceData.data.running_processes">
+                                <td>{{process.process_id}}</td>
+                                <td>{{process.path}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+                angular.module("msp", ['chart.js']).controller("mspController", ["$scope", "$http", function($scope, $http) {
+                    $scope.performanceData = {
+                        status: "init",
+                        data: {}
+                    };
+
+                    $scope.labels = [];
+                    $scope.series = ['CPU Usage'];
+                    $scope.data = [[]];
+                    $scope.options = {
+                        animation: false,
+                        scaleOverride: true,
+                        scaleStartValue: 0,
+                        scaleSteps: 10,
+                        scaleStepWidth: 10,
+                        showTooltips: false,
+                        scaleShowGridLines : true,
+                        scaleGridLineColor : "rgba(0,0,0,.05)",
+                        scaleGridLineWidth : 1,
+                        scaleShowHorizontalLines: true,
+                        scaleShowVerticalLines: false,
+                        bezierCurve : false,
+                        pointDot : false,
+                        datasetFill : true
+                    };
+                    $scope.colours = [ '#4CFF00' ];
+
+                    for (var i = 0; i < 40; i++) {
+                        $scope.labels[i] = '';
+                        $scope.data[0][i] = 0;
+                    }
+
+                    var workerID = setInterval(function() {
+                        $http.get("http://localhost:3000/api/performance/")
+                            .success(function(data, status, headers, config) {
+                                $scope.performanceData.status = "success";
+                                $scope.performanceData.data = data;
+
+                                $scope.data[0].shift();
+                                $scope.data[0].push(data.cpu_usage);
+                            })
+                            .error(function(data, status, headers, config) {
+                                $scope.performanceData.status = "Server Down";
+                                clearInterval(workerID);
+                            });
+                    }, 1000);
+                }]);
+        </script>
+    </body>
+</html>

@@ -13,6 +13,7 @@
     
     router.use('/factorial', require('./factorialAPI.js')(express));
     router.use('/prime', require('./primeAPI.js')(express));
+    router.use('/performance', require('./performanceAPI.js')(express));
     
     return router;
 }
