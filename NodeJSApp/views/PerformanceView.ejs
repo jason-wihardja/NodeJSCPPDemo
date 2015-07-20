@@ -3,12 +3,12 @@
     <head>
         <title>Performance Monitoring</title>
 
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.js"></script>
+        <link rel="stylesheet" href="stylesheets/bootstrap.min.css">
+        <script type="text/javascript" src="scripts/angular.min.js"></script>
 
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
-        <link rel="stylesheet" href="http://jtblin.github.io/angular-chart.js/dist/angular-chart.min.css">
-        <script src="http://jtblin.github.io/angular-chart.js/dist/angular-chart.min.js"></script>
+        <script type="text/javascript" src="scripts/Chart.min.js"></script>
+        <link rel="stylesheet" href="stylesheets/angular-chart.css">
+        <script src="scripts/angular-chart.min.js"></script>
     </head>
     <body ng-controller="mspController">
         <div class="container">
@@ -27,7 +27,7 @@
 
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
-                    <table class="table table-hover table-bordered">
+                    <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <!--<th colspan="2" class="text-center">{{performanceData.status == 'success' ? performanceData.data : performanceData.status}}</th>-->
@@ -70,7 +70,7 @@
 
             <div>
                 <br />
-                <h3 class="text-center">Running Processes</h3>
+                <h3 class="text-center">Running Processes ({{performanceData.data.running_processes.length}})</h3>
             </div>
 
             <div class="row">
@@ -127,20 +127,25 @@
                         $scope.data[0][i] = 0;
                     }
 
-                    var workerID = setInterval(function() {
+                    var workerID;
+
+                    $scope.getData = function () {
                         $http.get("http://localhost:3000/api/performance/")
-                            .success(function(data, status, headers, config) {
+                            .success(function (data, status, headers, config) {
                                 $scope.performanceData.status = "success";
                                 $scope.performanceData.data = data;
 
                                 $scope.data[0].shift();
                                 $scope.data[0].push(data.cpu_usage);
                             })
-                            .error(function(data, status, headers, config) {
+                            .error(function (data, status, headers, config) {
                                 $scope.performanceData.status = "Server Down";
                                 clearInterval(workerID);
                             });
-                    }, 1000);
+                    };
+                    $scope.getData();
+
+                    workerID = setInterval($scope.getData, 1000);
                 }]);
         </script>
     </body>
