@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="text-center">
-                        <p>Node.js - Windows API binding Demo</p>
+                        <p>Node.js - Windows API (C++) Binding Demo</p>
                     </h1>
                 </div>
             </div>
@@ -95,58 +95,58 @@
         </div>
 
         <script type="text/javascript">
-                angular.module("msp", ['chart.js']).controller("mspController", ["$scope", "$http", function($scope, $http) {
-                    $scope.performanceData = {
-                        status: "init",
-                        data: {}
-                    };
+            angular.module("msp", ['chart.js']).controller("mspController", ["$scope", "$http", function($scope, $http) {
+                $scope.performanceData = {
+                    status: "init",
+                    data: {}
+                };
 
-                    $scope.labels = [];
-                    $scope.series = ['CPU Usage'];
-                    $scope.data = [[]];
-                    $scope.options = {
-                        animation: false,
-                        scaleOverride: true,
-                        scaleStartValue: 0,
-                        scaleSteps: 10,
-                        scaleStepWidth: 10,
-                        showTooltips: false,
-                        scaleShowGridLines : true,
-                        scaleGridLineColor : "rgba(0,0,0,.05)",
-                        scaleGridLineWidth : 1,
-                        scaleShowHorizontalLines: true,
-                        scaleShowVerticalLines: false,
-                        bezierCurve : false,
-                        pointDot : false,
-                        datasetFill : true
-                    };
-                    $scope.colours = [ '#4CFF00' ];
+                $scope.labels = [];
+                $scope.series = ['CPU Usage'];
+                $scope.data = [[]];
+                $scope.options = {
+                    animation: false,
+                    scaleOverride: true,
+                    scaleStartValue: 0,
+                    scaleSteps: 10,
+                    scaleStepWidth: 10,
+                    showTooltips: false,
+                    scaleShowGridLines : true,
+                    scaleGridLineColor : "rgba(0,0,0,.05)",
+                    scaleGridLineWidth : 1,
+                    scaleShowHorizontalLines: true,
+                    scaleShowVerticalLines: false,
+                    bezierCurve : false,
+                    pointDot : false,
+                    datasetFill : true
+                };
+                $scope.colours = [ '#4CFF00' ];
 
-                    for (var i = 0; i < 40; i++) {
-                        $scope.labels[i] = '';
-                        $scope.data[0][i] = 0;
-                    }
+                for (var i = 0; i < 50; i++) {
+                    $scope.labels[i] = '';
+                    $scope.data[0][i] = 0;
+                }
 
-                    var workerID;
+                var workerID;
 
-                    $scope.getData = function () {
-                        $http.get("http://localhost:3000/api/performance/")
-                            .success(function (data, status, headers, config) {
-                                $scope.performanceData.status = "success";
-                                $scope.performanceData.data = data;
+                $scope.getData = function () {
+                    $http.get("http://localhost:3000/api/performance/")
+                        .success(function (data, status, headers, config) {
+                            $scope.performanceData.status = "success";
+                            $scope.performanceData.data = data;
 
-                                $scope.data[0].shift();
-                                $scope.data[0].push(data.cpu_usage);
-                            })
-                            .error(function (data, status, headers, config) {
-                                $scope.performanceData.status = "Server Down";
-                                clearInterval(workerID);
-                            });
-                    };
-                    $scope.getData();
+                            $scope.data[0].shift();
+                            $scope.data[0].push(data.cpu_usage);
+                        })
+                        .error(function (data, status, headers, config) {
+                            $scope.performanceData.status = "Server Down";
+                            clearInterval(workerID);
+                        });
+                };
+                $scope.getData();
 
-                    workerID = setInterval($scope.getData, 1000);
-                }]);
+                workerID = setInterval($scope.getData, 1000);
+            }]);
         </script>
     </body>
 </html>
