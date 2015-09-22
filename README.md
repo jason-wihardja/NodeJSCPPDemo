@@ -2,7 +2,7 @@
 
 This is a project to demonstrate C++ usage for making a Node.js Addon in Visual Studio as demoed at Microsoft Student Partner Gathering for Jabodetabek.
 
-### Link for presentation slide ###
+### Link to presentation slide ###
 
 http://1drv.ms/1OMWe76
 
