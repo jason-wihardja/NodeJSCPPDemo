@@ -8,6 +8,7 @@
 *.sln.docstates
 Thumbs.db
 NodeJSApp/addons/*.node
+/MSPNodeJSCPPDemo.VC.opendb
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs

@@ -82,7 +82,8 @@ void PerformanceAlgorithm::GetPerformanceDataWork(uv_work_t* request) {
 
 void PerformanceAlgorithm::GetPerformanceDataAsyncAfter(uv_work_t* request, int status) {
 	Isolate* isolate = Isolate::GetCurrent();
-	EscapableHandleScope scope(isolate);
+	HandleScope scope(isolate);
+	EscapableHandleScope escapableHandleScope(isolate);
 
 	Baton<string, PerformanceData>* baton = static_cast<Baton<string, PerformanceData>*>(request->data);
 	Local<Function> callbackFunction = Local<Function>::New(isolate, baton->callbackFunction);
@@ -108,7 +109,7 @@ void PerformanceAlgorithm::GetPerformanceDataAsyncAfter(uv_work_t* request, int 
 	returnValue->Set(String::NewFromUtf8(isolate, "running_processes"), processes);
 
 	const unsigned int argc = 1;
-	Handle<Value> argv[argc] = { scope.Escape(returnValue) };
+	Handle<Value> argv[argc] = { escapableHandleScope.Escape(returnValue) };
 	callbackFunction->Call(isolate->GetCurrentContext()->Global(), argc, argv);
 
 	baton->callbackFunction.Reset();
