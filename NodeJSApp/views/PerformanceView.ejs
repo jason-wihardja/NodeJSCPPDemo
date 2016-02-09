@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="text-center">
-                        <p>Node.js - Windows API (C++) Binding Demo</p>
+                        <p>Node.js - Performance Demo</p>
                     </h1>
                 </div>
             </div>
@@ -95,7 +95,7 @@
         </div>
 
         <script type="text/javascript">
-            angular.module("msp", ['chart.js']).controller("mspController", ["$scope", "$http", function($scope, $http) {
+            angular.module("msp", ['chart.js']).controller("mspController", ["$scope", "$http", "$location", function($scope, $http, $location) {
                 $scope.performanceData = {
                     status: "init",
                     data: {}
@@ -130,7 +130,7 @@
                 var workerID;
 
                 $scope.getData = function () {
-                    $http.get("http://localhost:3000/api/performance/")
+                    $http.get($location.absUrl().replace('/performance', '/api/performance'))
                         .success(function (data, status, headers, config) {
                             $scope.performanceData.status = "success";
                             $scope.performanceData.data = data;
